@@ -8,5 +8,16 @@
 </head>
 <body>
     <h2>Torres de Hanoi</h2>
+    <label for="numDiscs">numDiscs: </label>
+    <input type="number" id="numDiscs" min="1" max="5">
+    <button onclick="startGame()">START</button>
+
+    <br>
+    <br>
+    <div id="joc-container">
+        <div class="torre" id="torre1"></div>
+        <div class="torre" id="torre2"></div>
+        <div class="torre" id="torre3"></div>
+    </div>
 </body>
 </html>
