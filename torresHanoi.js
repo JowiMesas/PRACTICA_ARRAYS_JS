@@ -1,5 +1,5 @@
 let torres = [[],[],[]];
-const colors = ['red', 'yellow', 'green', 'blue', 'orange'];
+const colors = ['red', 'orange', 'yellow', 'green', 'blue'];
 function startGame() {
     let  numDiscs = parseInt(document.getElementById('numDiscs').value);
     torres = [[], [], []];
