@@ -1,34 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Torres de Hanoi</title>
     <script src="torresHanoi.js" defer></script>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
 
+        #joc-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .torre-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .torre {
+            width: 200px;
+            height: 200px;
+            border: 2px solid black;
+            position: relative;
+            background: #eee;
+        }
+
+        .botons-torre {
+            margin-top: 10px;
+        }
+
+        .botons-torre button {
+            display: block;
+            margin: 5px 0;
+            padding: 5px;
+            width: 100px;
+        }
+
+        .disk {
+            position: absolute;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            color: white;
+            border: 1px solid black;
+        }
     </style>
 </head>
+
 <body>
     <h2>Torres de Hanoi</h2>
     <label for="numDiscs">numDiscs: </label>
     <input type="number" id="numDiscs" min="1" max="5" required>
     <button onclick="startGame()">START</button>
 
-    <br>
-    <br>
+    <br><br>
+
     <div id="joc-container">
-        <div class="torre" id="torre1"></div>
-        <div class="torre" id="torre2"></div>
-        <div class="torre" id="torre3"></div>
+        <div class="torre-container">
+            <div class="torre" id="torre1"></div>
+            <div class="botons-torre">
+                <button onclick="mouDisc(0, 1)">MOU PILA 2</button>
+                <button onclick="mouDisc(0, 2)">MOU PILA 3</button>
+            </div>
+        </div>
+        <div class="torre-container">
+            <div class="torre" id="torre2"></div>
+            <div class="botons-torre">
+                <button onclick="mouDisc(1, 0)">MOU PILA 1</button>
+                <button onclick="mouDisc(1, 2)">MOU PILA 3</button>
+            </div>
+        </div>
+        <div class="torre-container">
+            <div class="torre" id="torre3"></div>
+            <div class="botons-torre">
+                <button onclick="mouDisc(2, 0)">MOU PILA 1</button>
+                <button onclick="mouDisc(2, 1)">MOU PILA 2</button>
+            </div>
+        </div>
     </div>
-    <div>
-        <button onclick="mouDisc(0, 1)">MOU PILA 2</button>
-        <button onclick="mouDisc(0, 2)">MOU PILA 3</button>
-        <button onclick="mouDisc(1, 0)">MOU PILA 1</button>
-        <button onclick="mouDisc(1, 2)">MOU PILA 3</button>
-        <button onclick="mouDisc(2, 0)">MOU PILA 1</button>
-        <button onclick="mouDisc(2, 1)">MOU PILA 2</button>
-      </div>
 </body>
+
 </html>
