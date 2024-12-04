@@ -45,10 +45,7 @@ function mouDisc(torreAnterior, nextTorre) {
 
     const movimentDisc = torres[torreAnterior][torres[torreAnterior].length - 1];
 
-    if (
-        torres[nextTorre].length > 0 &&
-        torres[nextTorre][torres[nextTorre].length - 1] < movimentDisc
-    ) {
+    if (torres[nextTorre].length > 0 &&torres[nextTorre][torres[nextTorre].length - 1] < movimentDisc) {
         alert("No es pot colocar un disc més gran a sobre de un més petit.");
         return;
     }
