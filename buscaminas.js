@@ -6,6 +6,7 @@ let puntuacio = 0;
 let jocFinish = false;
 let divPuntuacio = document.getElementById('puntuacio');
 function iniciarJoc() {
+  jocFinish = false;
     puntuacio = 0;
     divPuntuacio.textContent = puntuacio;
     generarTaulell();
@@ -16,8 +17,8 @@ function generarTaulell() {
     taulell = [];
     for (let i = 0; i < filas; i++) {
       taulell[i] = [];
-      for (let j = 0; j < columnas; j++) {
-        taulell[i][j] = 0; 
+      for (let k = 0; k < columnas; k++) {
+        taulell[i][k] = 0; 
       }
     }
     let colocarBombes = 0;
@@ -29,8 +30,8 @@ function generarTaulell() {
             colocarBombes++;
             for (let i = fila -1; i <= fila + 1; i++) {
                 for (let k = columna -1; k <= columna + 1; k++) {
-                    if (i >= 0 && i < filas && j >= 0 && j < columnas && taulell[i][j] !== "M") {
-                        taulell[i][j]++;
+                    if (i >= 0 && i < filas && k>= 0 && k < columnas && taulell[i][k] !== "M") {
+                        taulell[i][k]++;
                       }
                 }
             }
@@ -51,44 +52,51 @@ function mostrarTaulell() {
         }
     }
     //Prova que ha de sortir per consola el taulell
-    console.log("Taulell: ", taulell);
+    console.table(taulell);
 }
 
 function mostrarCasella(fila, columna) {
-    if(jocFinish) return;
-const casella = document.querySelector(`.casella[data-fila='${fila}'][data-columna='${columna}']`);
-if(!casella || casella.classList.contains('casellaDescoberta')) return;
-casella.classList.add('casellaDescoberta');
-if(taulell[fila][columna] === "M") {
-    casella.classList.add('bomba');
-    casella.textContent = "💣";
-    alert("KBOOM!! Has perdut!!")
-    mostrarTotesBombes();
-    divPuntuacio.textContent = "PUNTUACIÓ: " + puntuacio + " KBOOM";
-    jocFinish = true;
-} else {
-    casella.classList.add('numero');
-    casella.textContent = taulell[fila][columna] || "";
-    puntuacio++;
-    divPuntuacio.textContent = "PUNTUACIÓ: " + puntuacio;
+  if (jocFinish) return;
+  const casella = document.querySelector(`.casella[data-fila='${fila}'][data-columna='${columna}']`);
 
-    if(taulell[fila][columna] === 0) {
-        mostrarCasellesConnectades();
-    }
-    if (puntuacio === filas * columnas - bombes) {
-        alert("Felicitats, has guanyat!");
-        jocFinish = true;  
+  // Evitar que se procese una casilla ya descubierta
+  if (!casella || casella.classList.contains('casellaDescoberta')) return;
+
+  casella.classList.add('casellaDescoberta');
+
+  if (taulell[fila][columna] === "M") {
+      casella.classList.add('bomba');
+      casella.textContent = "💣";
+      alert("KBOOM!! Has perdut!!");
+      mostrarTotesBombes();
+      divPuntuacio.textContent = "PUNTUACIÓ: " + puntuacio + " KBOOM";
+      jocFinish = true;
+  } else {
+      casella.classList.add('numero');
+      casella.textContent = taulell[fila][columna] || "";
+      puntuacio++;
+      divPuntuacio.textContent = "PUNTUACIÓ: " + puntuacio;
+
+
+      if (taulell[fila][columna] === 0) {
+          mostrarCasellesConnectades(fila, columna); 
       }
+
+      if (puntuacio === filas * columnas - bombes) {
+          alert("Felicitats, has guanyat!");
+          jocFinish = true;  
+      }
+  }
 }
-}
- function mostrarCasellesConnectades(fila, columna) {
-    for (let i = fila - 1; i <= fila + 1; i++) {
-        for (let k = columna - 1; k <= columna + 1; k++) {
+
+function mostrarCasellesConnectades(fila, columna) {
+  for (let i = fila - 1; i <= fila + 1; i++) {
+      for (let k = columna - 1; k <= columna + 1; k++) {
           if (i >= 0 && i < filas && k >= 0 && k < columnas) {
-            mostrarCasella(i, k);
+              mostrarCasella(i, k); 
           }
-        }
       }
+  }
 }
 function mostrarTotesBombes() {
     for (let i = 0; i < filas; i++) {
