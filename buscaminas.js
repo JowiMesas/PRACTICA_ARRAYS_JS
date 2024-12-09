@@ -84,6 +84,7 @@ function mostrarCasella(fila, columna) {
 
       if (puntuacio === filas * columnas - bombes) {
           alert("Felicitats, has guanyat!");
+          mostrarTotesBombes();
           jocFinish = true;  
       }
   }
