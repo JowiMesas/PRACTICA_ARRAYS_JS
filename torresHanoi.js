@@ -30,8 +30,8 @@ function personalitzarTorres() {
             divDisc.className = "disk";
             divDisc.style.backgroundColor = colors[disk - 1];
             divDisc.textContent = disk;
-            divDisc.style.width = `${disk * 20 + 40}px`; // Tamaño proporcional
-            divDisc.style.bottom = `${i * 22}px`; // Altura proporcional
+            divDisc.style.width = `${disk * 20 + 40}px`; 
+            divDisc.style.bottom = `${i * 22}px`; 
             divTorre.appendChild(divDisc);
         });
     });
